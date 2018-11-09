@@ -13,6 +13,10 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: 'cart',
+    component: CheckoutComponent
+  },
+  {
     path: 'checkout',
     component: CheckoutComponent
   },
