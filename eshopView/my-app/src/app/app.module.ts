@@ -9,7 +9,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { Checkout1Component } from './checkout1/checkout1.component';
 import { Checkout2Component } from './checkout2/checkout2.component';
 import { Checkout3Component } from './checkout3/checkout3.component';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +22,8 @@ import { Checkout3Component } from './checkout3/checkout3.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

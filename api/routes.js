@@ -8,12 +8,52 @@ module.exports = function (app) {
   var AttributesCtrl = require('./controllers/AttributesController');
   var AttributesdetailCtrl = require('./controllers/AttributesdetailController');
   var ProudctattributesdetailCtrl = require('./controllers/ProudctattributesdetailController');
-  
+
   var OrderCtrl = require('./controllers/OrderController');
-  
+
+  var SearchCtrl = require('./controllers/SearchController');
   //OrderCtrl
-  
-  
+
+
+  app.all('*', function (req, res, next) {
+    /**
+     * Response settings
+     * @type {Object}
+     */
+    var responseSettings = {
+      "AccessControlAllowOrigin": req.headers.origin,
+      "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
+      "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
+      "AccessControlAllowCredentials": true
+    };
+
+    /**
+     * Headers
+     */
+    res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
+    res.header("Access-Control-Allow-Origin", responseSettings.AccessControlAllowOrigin);
+    res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
+    res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
+
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+
+
+  });
+
+  //SearchCtrl
+  app.route('/getSize/:id')
+    .get(SearchCtrl.getSize)
+  app.route('/getColor/:id')
+    .get(SearchCtrl.getColor)
+  app.route('/getFrom/:id')
+    .get(SearchCtrl.getFrom)
+  //SearchCtrl
+
   app.route('/order')
     .get(OrderCtrl.get)
     .post(OrderCtrl.store);
