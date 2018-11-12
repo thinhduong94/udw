@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
     band: "",
     category: "",
     size: "",
-    color: ""
+    color: "",
+    priceFrom:"",
+    priceTo:""
   }
 
   size: any[] = [];
@@ -26,7 +28,7 @@ export class HomeComponent implements OnInit {
 
   categoryidSelected = "1";
   products: any[] = [];
-  trademark = [
+  bands = [
     {
       id: "1",
       name: "Adidas",
@@ -125,16 +127,36 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.searchItem.category = this.categoryidSelected;
     this.getSearch();
-    this.productSv.getAll().subscribe(data => {
+    this.searchSv.getBands().subscribe(data=>{
+      this.bands = data;
+    });
+    this.searchSv.getCategories().subscribe(data=>{
+      this.cateroies = data;
+    });
+    this.searchSv.getProductByCategory(this.categoryidSelected).subscribe(data => {
       this.products = data;
     })
   }
   selectCategory(item) {
     this.categoryidSelected = item.id;
+    this.searchItem.category = this.categoryidSelected;
+    this.getSearch();
     console.log(this.categoryidSelected);
   }
-
+  clear(){
+    this.searchItem = {
+      name: "",
+      price: "",
+      priceFrom:"",
+      priceTo:"",
+      band: "",
+      category: this.categoryidSelected,
+      size: "",
+      color: ""
+    }; 
+  }
   selectSubCategory(item) {
     this.categoryidSelected = item.id;
     console.log(this.categoryidSelected);
@@ -150,5 +172,17 @@ export class HomeComponent implements OnInit {
       this.color = results[1];
       this.form = results[2];
     })
+  }
+  chooseSize(event){
+    console.log(1);
+  }
+  apply(){
+    console.log(this.searchItem);
+    this.search(this.searchItem);
+  }
+  search(item){
+    this.searchSv.search(item).subscribe(data=>{
+      console.log(data);
+    });
   }
 }

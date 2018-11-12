@@ -52,6 +52,10 @@ module.exports = function (app) {
     .get(SearchCtrl.getColor)
   app.route('/getFrom/:id')
     .get(SearchCtrl.getFrom)
+  app.route('/getProductByCategoryId/:id')
+    .get(SearchCtrl.getCategory)
+  app.route('/search')
+    .get(SearchCtrl.search)
   //SearchCtrl
 
   app.route('/order')
@@ -91,12 +95,12 @@ module.exports = function (app) {
     .delete(productsCtrl.delete);
 
   // TrademarkCtrl 
-  app.route('/trademark')
+  app.route('/band')
     .get(TrademarkCtrl.get)
     .post(TrademarkCtrl.store);
 
 
-  app.route('/trademark/:id')
+  app.route('/band/:id')
     .get(TrademarkCtrl.detail)
     .put(TrademarkCtrl.update)
     .delete(TrademarkCtrl.delete);
