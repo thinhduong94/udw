@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/service/product.service';
 import { SearchService } from 'src/app/service/search.service';
 import { Observable, forkJoin } from 'rxjs';
+import { CartService } from '../service/cart.service';
 
 
 @Component({
@@ -123,7 +124,8 @@ export class HomeComponent implements OnInit {
   ];
   constructor(
     private searchSv: SearchService,
-    private productSv: ProductService
+    private productSv: ProductService,
+    private cartSv:CartService
   ) { }
 
   ngOnInit() {
@@ -143,7 +145,9 @@ export class HomeComponent implements OnInit {
     this.categoryidSelected = item.id;
     this.searchItem.category = this.categoryidSelected;
     this.getSearch();
-    console.log(this.categoryidSelected);
+    this.searchSv.getProductByCategory(this.categoryidSelected).subscribe(data => {
+      this.products = data;
+    })
   }
   clear(){
     this.searchItem = {
@@ -179,6 +183,13 @@ export class HomeComponent implements OnInit {
   apply(){
     console.log(this.searchItem);
     this.search(this.searchItem);
+  }
+  addCart(item){
+    var _item = {
+      id:item.id,
+      quatity:1
+    };
+    this.cartSv.addItem(_item);
   }
   search(item){
     this.searchSv.search(item).subscribe(data=>{

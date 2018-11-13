@@ -8,7 +8,7 @@ const table = 'product'
 
 module.exports = {
     get: (req, res) => {
-        let sql = 'SELECT * FROM product'
+        let sql = 'SELECT product.id,product.name,product.imageBase64,product.price FROM product , produtdetail WHERE produtdetail.product_id = product.id GROUP BY product.id,product.name,product.imageBase64,product.price'
         db.query(sql, (err, response) => {
             if (err) throw err
             res.json(response)

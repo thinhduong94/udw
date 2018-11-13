@@ -50,7 +50,10 @@ module.exports = {
     },
     getCategory: (req, res) => {
         let id = req.params.id;
-        let sql = ' SELECT product.id,product.name,product.imageBase64,product.price FROM product , category WHERE product.category_id = category.id AND category.id = ?';
+        let sql = ' SELECT product.id,product.name,product.imageBase64,product.price '+ 
+        'FROM produtdetail , product , category '+
+        'WHERE  produtdetail.product_id = product.id and product.category_id = category.id AND category.id = ? '+
+        'GROUP BY product.id,product.name,product.imageBase64,product.price';
         db.query(sql, [req.params.id], (err, response) => {
             if (err) throw err
             res.json(response)
