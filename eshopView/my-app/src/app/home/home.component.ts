@@ -182,7 +182,7 @@ export class HomeComponent implements OnInit {
   }
   search(item){
     this.searchSv.search(item).subscribe(data=>{
-      console.log(data);
+      this.products = data;
     });
   }
 }

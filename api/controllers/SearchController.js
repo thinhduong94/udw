@@ -5,32 +5,43 @@ const mysql = require('mysql')
 const db = require('./../db')
 
 module.exports = {
-   
-    
     search: (req, res) => {
-        let id = req.params.id;
-        let name = req.params.name;
-        let priceFrom = req.params.priceFrom;
-        let priceTo = req.params.priceTo;
-        let band = req.params.band;
-        let category = req.params.category;
-        let size = req.params.size;
-        let color = req.params.color;
-        console.log(req.params);
+        let id = req.query.id;
+        let name = req.query.name;
+        let priceFrom = req.query.priceFrom;
+        let priceTo = req.query.priceTo;
+        let band = req.query.band;
+        let category = req.query.category;
+        let size = req.query.size;
+        let color = req.query.color;
+        console.log(req.query);
         let sql = ' SELECT product.id,product.name,product.imageBase64,product.price'+
         ' FROM product,produtdetail,category,bands'+
         ' WHERE product.band_id = bands.id'+
         ' AND product.category_id = category.id'+
-        ' AND product.id = produtdetail.product_id'+
-        ' AND ('+category+' OR category.id ='+category+')'+
-        ' AND ('+band+' OR bands.id ='+band+')'+
-        ' AND ('+priceFrom+' OR product.price > '+priceFrom+')'+
-        ' AND ('+priceTo+' OR product.price < '+priceTo+')'+
-        ' AND ('+name+' OR product.name LIKE "%'+name+'%")'+
-        ' AND ('+size+' OR produtdetail.sizeValue = '+size+')'+
-        ' AND ('+color+' ORprodutdetail.colorVlaue = '+color+')'+
-        ' GROUP BY product.id,product.name,product.imageBase64,product.price';
-
+        ' AND product.id = produtdetail.product_id';
+        if(category){
+            sql+= ' AND category.id ='+category+'';
+        }
+        if(band){
+            sql+= ' AND bands.id ='+band+'';
+        }
+        if(name){
+            sql+= ' AND product.name LIKE "%'+name+'%"';
+        }
+        if(priceFrom){
+            sql+= ' AND product.price >= '+priceFrom+'';
+        }
+        if(priceTo){
+            sql+= ' AND product.price <= '+priceTo+'';
+        }
+        if(size){
+            sql+= ' AND produtdetail.sizeValue = "'+size+'"';
+        }
+        if(color){
+            sql+= ' AND produtdetail.colorVlaue = "'+color+'"';
+        }
+        sql += ' GROUP BY product.id,product.name,product.imageBase64,product.price';
         console.log(sql);
         db.query(sql, [req.params.id], (err, response) => {
             if (err) throw err
