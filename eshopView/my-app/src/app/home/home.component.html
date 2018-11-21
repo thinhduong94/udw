@@ -148,8 +148,8 @@ _________________________________________________________ -->
                 <div class="form-group" *ngFor="let c of color">
                     <div class="checkbox">
                         <label>
-                            <input type="radio" name="color" [(ngModel)]="searchItem.color" [value]="c.colorVlaue">
-                            <span class="colour white" [style.background]="c.colorVlaue"></span> {{c.colorName}} (14)
+                            <input type="radio" name="color" [(ngModel)]="searchItem.color" [value]="c.colorValue">
+                            <span class="colour white" [style.background]="c.colorValue"></span> {{c.colorName}} (14)
                         </label>
                     </div>
 
@@ -214,18 +214,18 @@ _________________________________________________________ -->
                         <div class="flipper">
                             <div class="front">
                                 <a href="detail.html">
-                                    <img [src]="item.imageBase64" alt="" class="img-responsive">
+                                    <img src="http://localhost:58837/upload/{{item.imgName}}" alt="" class="img-responsive">
                                 </a>
                             </div>
                             <div class="back">
                                 <a href="detail.html">
-                                    <img [src]="item.imageBase64" alt="" class="img-responsive">
+                                    <img src="http://localhost:58837/upload/{{item.imgName}}" alt="" class="img-responsive">
                                 </a>
                             </div>
                         </div>
                     </div>
                     <a href="detail.html" class="invisible">
-                        <img [src]="item.imageBase64" alt="" class="img-responsive">
+                        <img src="http://localhost:58837/upload/{{item.imgName}}" alt="" class="img-responsive">
                     </a>
                     <div class="text">
                         <h3><a href="detail.html">{{ item.name }}</a></h3>

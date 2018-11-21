@@ -10,6 +10,7 @@ export class ProductService {
     
   }
   getAll():Observable<any>{
-    return this.http.get<any>("http://localhost:3000/products");
+    return this.http.get<any>("http://localhost:58837/api/product");
   } 
+
 }

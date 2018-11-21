@@ -11,6 +11,7 @@ import { Checkout2Component } from './checkout2/checkout2.component';
 import { Checkout3Component } from './checkout3/checkout3.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AccountComponent } from './account/account.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { FormsModule } from '@angular/forms';
     CheckoutComponent,
     Checkout1Component,
     Checkout2Component,
-    Checkout3Component
+    Checkout3Component,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

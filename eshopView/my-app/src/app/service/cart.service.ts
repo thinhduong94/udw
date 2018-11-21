@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
   getLocalStorage(){
     return JSON.parse(localStorage.getItem('cart'))
   }
@@ -20,20 +21,37 @@ export class CartService {
   addItem(item){
     let cart:any[] = this.get();
     if(cart.length > 0){
-      let count = cart.find(x=>x.id == item.id);
-      if(count>0){
+      let _item = cart.find(x=>x.id == item.id);
+      if(!_item){
         cart.push(item);
       } 
+    }else{
+      cart.push(item);
     }
     this.setLocalStorage(cart);
   }
-  deleteItem(){
-
+  deleteItem(id){
+    let cart:any[] = this.get();
+    let index = cart.findIndex(x=>x.id == id);
+    cart.splice(index,1);
+    this.setLocalStorage(cart);
   }
-  updateItem(){
-
+  updateItem(item){
+    this.setLocalStorage(item);
   }
-  save(){
-
+  save(item){
+   return this.http.post<any>("http://localhost:58837/api/order",this.mapData(item));
+  }
+  getBenefit(id:string){
+    return this.http.get<any>("http://localhost:58837/api/order/getBenefit/"+id);
+  }
+  mapData(item){
+    return {
+      "username":item.username,
+      "address":item.address,
+      "phone":item.phone,
+      "paymethod":item.paymethod,
+      "detail":item.cart
+    }
   }
 }

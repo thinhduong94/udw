@@ -132,10 +132,10 @@ export class HomeComponent implements OnInit {
     this.searchItem.category = this.categoryidSelected;
     this.getSearch();
     this.searchSv.getBands().subscribe(data=>{
-      this.bands = data;
+      this.bands = data.data;
     });
     this.searchSv.getCategories().subscribe(data=>{
-      this.cateroies = data;
+      this.cateroies = data.data;
     });
     this.searchSv.getProductByCategory(this.categoryidSelected).subscribe(data => {
       this.products = data;
@@ -169,12 +169,10 @@ export class HomeComponent implements OnInit {
   getSearch() {
     forkJoin([
       this.searchSv.getSize(this.categoryidSelected),
-      this.searchSv.getColor(this.categoryidSelected),
-      this.searchSv.getFrom(this.categoryidSelected)
+      this.searchSv.getColor(this.categoryidSelected)
     ]).subscribe((results: any[]) => {
       this.size = results[0];
       this.color = results[1];
-      this.form = results[2];
     })
   }
   chooseSize(event){
@@ -185,11 +183,8 @@ export class HomeComponent implements OnInit {
     this.search(this.searchItem);
   }
   addCart(item){
-    var _item = {
-      id:item.id,
-      quatity:1
-    };
-    this.cartSv.addItem(_item);
+    item.quantity = 1;
+    this.cartSv.addItem(item);
   }
   search(item){
     this.searchSv.search(item).subscribe(data=>{
