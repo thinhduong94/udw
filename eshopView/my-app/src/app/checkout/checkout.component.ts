@@ -27,9 +27,12 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
   }
   checkBenefit(){
+    this.benefit = 0;
     this.cartSv.getBenefit(this.infoCheckout.username).subscribe(data=>{
       if(data){
-        this.benefit = data.value;
+        data.forEach(x=>{
+          this.benefit += x.value;
+        })
         this.total();
       }
     })
