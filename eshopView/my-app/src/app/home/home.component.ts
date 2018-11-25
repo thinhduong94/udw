@@ -129,8 +129,6 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.searchItem.category = this.categoryidSelected;
-    this.getSearch();
     this.searchSv.getBands().subscribe(data=>{
       this.bands = data.data;
     });
@@ -156,7 +154,7 @@ export class HomeComponent implements OnInit {
       priceFrom:"",
       priceTo:"",
       band: "",
-      category: this.categoryidSelected,
+      category: "",
       size: "",
       color: ""
     }; 

@@ -14,6 +14,18 @@ export class CartService {
     let item:string = JSON.stringify(items);
     localStorage.setItem('cart',item);
   }
+  clear(key){
+    localStorage.removeItem(key);
+  }
+  addHistory(items){
+    let histores =  this.getHistory() || [];
+    histores.push(items);
+    let item:string = JSON.stringify(histores);
+    localStorage.setItem('history',item);
+  }
+  getHistory(){
+    return JSON.parse(localStorage.getItem('history'))
+  }
   get(){
     let cart:any[] = this.getLocalStorage()  || [] ;
     return cart;
@@ -41,6 +53,9 @@ export class CartService {
   }
   save(item){
    return this.http.post<any>("http://localhost:58837/api/order",this.mapData(item));
+  }
+  getDetailOrder(id){
+    return this.http.get<any>("http://localhost:58837/api/order/"+id);
   }
   getBenefit(id:string){
     return this.http.get<any>("http://localhost:58837/api/order/getBenefit/"+id);

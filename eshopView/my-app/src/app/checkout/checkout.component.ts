@@ -49,7 +49,9 @@ export class CheckoutComponent implements OnInit {
     });
     this.infoCheckout.cart = arr;
     this.cartSv.save(this.infoCheckout).subscribe(data => {
-      alert(data);
+      this.cartSv.addHistory(data);
+      alert("Success");
+      
     })
     console.log(this.infoCheckout);
   }

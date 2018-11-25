@@ -32,6 +32,7 @@ export class CartComponent implements OnInit {
     this.cartSv.deleteItem(id);
     this.product = this.cartSv.get();
   }
+  
   total(){
     let total = 0;
     this.product.forEach(p => {

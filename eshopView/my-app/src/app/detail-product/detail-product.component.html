@@ -1,0 +1,86 @@
+<div class="container">
+
+  <div class="col-md-12">
+    <ul class="breadcrumb">
+      <li><a href="#">Home</a>
+      </li>
+      <li><a href="#">Ladies</a>
+      </li>
+      <li><a href="#">Tops</a>
+      </li>
+      <li>White Blouse Armani</li>
+    </ul>
+
+  </div>
+
+  <div class="col-md-12">
+
+    <div class="row" id="productMain">
+      <div class="col-sm-6">
+        <div id="mainImage">
+          <img src="http://localhost:58837/upload/{{product.imgName}}" alt="" class="img-responsive">
+        </div>
+
+        <div class="ribbon sale">
+          <div class="theribbon">SALE</div>
+          <div class="ribbon-background"></div>
+        </div>
+        <!-- /.ribbon -->
+
+        <div class="ribbon new">
+          <div class="theribbon">NEW</div>
+          <div class="ribbon-background"></div>
+        </div>
+        <!-- /.ribbon -->
+
+      </div>
+      <div class="col-sm-6">
+        <div class="box">
+          <h1 class="text-center">{{product.name}}</h1>
+          <div class="goToDescription">
+            <ul style="list-style: none;padding: 0;">
+              <li *ngFor="let item of product.productChilViews">
+                <p>{{"size:"+item.sizeName}}-{{"color:"+item.colorName}}</p>
+              </li>
+            </ul>
+          </div>
+          <p class="price">${{product.price}}</p>
+          <p class="price">
+            Category:<span>{{product.category.name}}</span>
+          </p>
+          <p class="price">
+            Band:<span>{{product.band.name}}</span>
+          </p>
+          <p class="text-center buttons">
+            <a (click)="addCart(product)" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+            <a  class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
+          </p>
+
+
+        </div>
+
+        <div class="row" id="thumbs">
+          <div class="col-xs-4">
+            <a href="http://localhost:58837/upload/{{product.imgName}}" class="thumb active">
+              <img src="http://localhost:58837/upload/{{product.imgName}}" alt="" class="img-responsive">
+            </a>
+          </div>
+          <div class="col-xs-4">
+            <a href="http://localhost:58837/upload/{{product.imgName}}" class="thumb">
+              <img src="http://localhost:58837/upload/{{product.imgName}}" alt="" class="img-responsive">
+            </a>
+          </div>
+          <div class="col-xs-4">
+            <a href="http://localhost:58837/upload/{{product.imgName}}" class="thumb">
+              <img src="http://localhost:58837/upload/{{product.imgName}}" alt="" class="img-responsive">
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+  <!-- /.col-md-9 -->
+</div>

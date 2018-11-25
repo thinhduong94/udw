@@ -19,7 +19,7 @@ _________________________________________________________ -->
 
             <div class="panel-body">
                 <ul class="nav nav-pills nav-stacked category-menu">
-                    <li *ngFor="let c of cateroies">
+                    <li [ngClass]="c.id == categoryidSelected ? 'active' : '' " *ngFor="let c of cateroies">
                         <a (click)="selectCategory(c)">{{c.name}}<span class="badge pull-right">42</span></a>
                         <!-- <ul>
                           <li *ngFor = "let sc of c.subCateroies">
@@ -231,7 +231,7 @@ _________________________________________________________ -->
                         <h3><a href="detail.html">{{ item.name }}</a></h3>
                         <p class="price">${{item.price}}</p>
                         <p class="buttons">
-                            <a href="detail.html" class="btn btn-default">View detail</a>
+                            <a routerLink="/product/{{item.id}}" class="btn btn-default">View detail</a>
                             <a (click)="addCart(item)" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Add to
                                 cart</a>
                         </p>

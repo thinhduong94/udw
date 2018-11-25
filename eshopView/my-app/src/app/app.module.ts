@@ -12,6 +12,9 @@ import { Checkout3Component } from './checkout3/checkout3.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AccountComponent } from './account/account.component';
+import { HistoryComponent } from './history/history.component';
+import { DetailHistoryComponent } from './detail-history/detail-history.component';
+import { DetailProductComponent } from './detail-product/detail-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,10 @@ import { AccountComponent } from './account/account.component';
     Checkout1Component,
     Checkout2Component,
     Checkout3Component,
-    AccountComponent
+    AccountComponent,
+    HistoryComponent,
+    DetailHistoryComponent,
+    DetailProductComponent
   ],
   imports: [
     BrowserModule,

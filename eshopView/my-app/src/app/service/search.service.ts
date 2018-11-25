@@ -30,29 +30,7 @@ export class SearchService {
   }
   search(item): Observable<any> {
     var searchItem = item;
-    // var queryString="http://localhost:3000/search/?";
-    // if(searchItem.category){
-    //   queryString+="category="+searchItem.category+"&";
-    // }
-    // if(searchItem.band){
-    //   queryString+="band="+searchItem.band+"&";
-    // }
-    // if(searchItem.color.trim().length){
-    //   queryString+="color="+searchItem.color+"&";
-    // }
-    // if(searchItem.size.trim().length){
-    //   queryString+="size="+searchItem.size+"&";
-    // }
-    // if(searchItem.name.trim().length){
-    //   queryString+="name="+searchItem.name+"&";
-    // }
-    // if(searchItem.priceFrom.trim().length){
-    //   queryString+="priceFrom="+searchItem.priceFrom+"&";
-    // }
-    // if(searchItem.priceTo.trim().length){
-    //   queryString+="priceTo="+searchItem.priceTo;
-    // }
-    //console.log(queryString);
+
     return this.http.post<any>("http://localhost:58837/api/product/search", this.mappData(searchItem));
   }
   mappData(item) {

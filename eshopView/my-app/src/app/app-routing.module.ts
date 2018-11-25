@@ -7,6 +7,9 @@ import { Checkout1Component } from './checkout1/checkout1.component';
 import { Checkout2Component } from './checkout2/checkout2.component';
 import { Checkout3Component } from './checkout3/checkout3.component';
 import { AccountComponent } from './account/account.component';
+import { HistoryComponent } from './history/history.component';
+import { DetailHistoryComponent } from './detail-history/detail-history.component';
+import { DetailProductComponent } from './detail-product/detail-product.component';
 
 const routes: Routes = [
   {
@@ -20,6 +23,18 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountComponent
+  },
+  {
+    path: 'history',
+    component: HistoryComponent
+  },
+  {
+    path: 'history/:id',
+    component: DetailHistoryComponent
+  },
+  {
+    path: 'product/:id',
+    component: DetailProductComponent
   },
   {
     path: 'checkout',
